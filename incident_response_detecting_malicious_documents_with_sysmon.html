@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Google site verification-->
+    <meta name="google-site-verification" content="ZNGAVpLH57ubR17YFkS1kr9uWstVE5-tEmb0eAVlEX0" />
+    <!--End Google site verification-->
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NSLWXR2R');</script>
+    <!-- End Google Tag Manager -->
+    <!--Google Adsense-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4126413092594705"
+    crossorigin="anonymous"></script>
+     <!--End Google Adsense-->
+    <title>Incident Response - Detecting Malicious Documents With Sysmon</title>
+    <meta http-equiv="x-ua-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Apple Developer and Safari Webkits-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!--Apple Developer and Safari Webkits End-->
+    <meta name="description"
+        content="This is my professional blog.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <!--<link rel="stylesheet" href="style.css" />-->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSLWXR2R"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--Main Navigation-->
+    <header>
+        <!-- Intro settings -->
+        <style>
+            #intro {
+                /* Margin to fix overlapping fixed navbar */
+                margin-top: 58px;
+            }
+
+            @media (max-width: 991px) {
+                #intro {
+                    /* Margin to fix overlapping fixed navbar */
+                    margin-top: 45px;
+                }
+            }
+        </style>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <!--Container wrapper-->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!--Left links-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Advanced Red Teaming - APT and Adversary Emulation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="phishing.html">Phishing Techniques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="initial_access.html">Initial Access Techniques</a>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="purple_team_cyber_range.html">Purple Team Cyber Range</a>
+                        </li>-->
+                       <li class="nav-item">
+                            <a class="nav-link" href="maintaining_persistence.html">Maintaining Persistence</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="defense_evasion.html">Defense Evasion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="incident_response_pshell_hunting.html">Incident Response -
+                                PowerShell Hunting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="incident_response_detecting_malicious_documents_with_sysmon.html">Incident
+                                Response - Detecting Malicious Documents With Sysmon</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mirt_basic_static_analysis.html">Malware Incident Response - Basic Static Analysis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="memory_forensics.html">Incident Response - Memory Forensics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index_base64.html">Base 64 Encoder/Decoder</a>
+                        </li>
+                    </ul>
+
+                    <!--Left links-->
+                </div>
+                <!-- Collapsible wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+        <div id="intro" class="p-5 text-center bg-light">
+
+            <h1 class="display-5">Incident Response - Detecting Malicious Documents With Sysmon</h1>
+
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <!--Main Navigation-->
+    <!--Main layout-->
+
+    <main class="mt-4 mb-5">
+        <div class="container">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-8 mb-4">
+                    <!--Section: Post mdb-->
+                    <section class="border-bottom mb-4">
+                        <!---- <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg" class="img-fluid shadow-2-strong rounded mb-4" alt="" /> -->
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
+                                <img src="IMG-9879-copy-2.webp" class="rounded shadow-1-strong me-2" height="35" alt=""
+                                    loading="lazy" loading="lazy" />
+                                <span><strong>Blog by: Grant Knoetze</strong> </span>
+                                <!---- <a href="" class="text-dark">Grant Knoetze</a> -->
+                            </div>
+                    </section>
+                    <!--Section: Post mdb-->
+
+                    <!--Section: Text-->
+                    <section>
+                        <div class="Introduction">
+                            <h2 class="display-6">Use Sysmon to Detect Malicous Documents Used in Targeted Spearphishing
+                                Attacks
+                            </h2>
+                            <br></br>
+                            <p class="lead"><em>Incident Response Process: </em><strong>
+                                </strong>
+                            </p>
+                            <ul>
+                                <li class="lead"><strong>Preparation</strong><em></em>
+                                </li>
+                                <li class="lead"><strong>Detection and analysis</strong><em>
+                                    </em></li>
+                                <li class="lead"><strong>Containment, eradication, recovery</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Post incident activity, including reporting and communication
+                                        with stakeholders</strong><em>
+                                    </em>
+                                </li>
+                            </ul>
+
+                            <p class="lead"><em>Incident response process courtesy of NIST (US National Institute for
+                                    Standards and Technology): </em><strong>
+                                </strong>
+                            </p>
+                            <a href="https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-61r2.pdf"
+                                target="_blank" rel="noopener">NIST computer security incident handling guide</a>
+                            <br></br>
+                            <h2 class="display-6">Why Sysmon?
+                            </h2>
+                            <p class="lead">"System Monitor (Sysmon) is a Windows system service and device driver that,
+                                once installed on a system, remains resident across system reboots to monitor and log
+                                system
+                                activity to the Windows event log. It provides detailed information about process
+                                creations,
+                                network connections, and changes to file creation time. By collecting the events it
+                                generates
+                                using Windows Event Collection or SIEM agents and subsequently analyzing them, you can
+                                identify
+                                malicious or anomalous activity and understand how intruders and malware operate on your
+                                network." - <em>Courtesy: Microsoft Documentation for Sysmon</em>
+                            </p>
+                            <a href="https://docs.microsoft.com/en-us/sysinternals/downloads/sysmon" target="_blank"
+                                rel="noopener">Microsoft Documentation for Sysmon</a>
+                            <br></br>
+                            <h2 class="display-6">The Scenario: An Attacker Has Used a Malicous Document in a Targeted
+                                Spearphishing
+                                Attack to Gain Initial Access Into the Organization
+                            </h2>
+                            <p class="lead">In this scenario, the attacker has utilized a malicious document as part of
+                                a targeted spearphishing attack to gain initial access into the organization. The
+                                intended victim
+                                has recieved a phishing email, and opened a malicious document, enabled editing(macros),
+                                and become
+                                infected in the first stage of a targeted malware attack. The attacker is an APT group,
+                                all malware
+                                and command and control servers are custom designed and written to bypass AV and EDR.
+                            </p>
+                            <h2 class="display-6">Sysmon Configuration
+                            </h2>
+                            <p class="lead">Sysmon takes configuration files in the form of XML files, an example of a
+                                sysmon configuration file
+                                can be seen below:</p>
+
+                            <img src="Sysmon_config.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Sysmon configuration file XML" /><br></br>
+                            <p class="lead">There are various open source projects available on GitHub for Sysmon
+                                configuration, I am
+                                using the SwiftOnSecurity open source project which is available here:
+                            </p>
+                            <a href="https://github.com/SwiftOnSecurity/sysmon-config" target="_blank"
+                                rel="noopener">SwiftOnSecurity GitHub</a>
+                            <p class="lead">Configuring Sysmon on my local machine using an XML file from an open source
+                                project I found on GitHub:
+                            </p>
+                            <img src="Sysmon_configuration.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Sysmon configuration file XML 2" /><br></br>
+
+                            <p class="lead">Sysmon XML configuration files can be modified to include or exclude events
+                                as per your organization
+                                or personal needs, for example, you may want to exclude some Windows process creation
+                                events, as seen in the SwiftOnSecurity
+                                XML schema below:
+                            </p>
+                            <img src="Sysmon_exclude.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Sysmon configuration file XML 3" /><br></br>
+
+                            <p class="lead">The Sysmon configuration XML file can be modified to include a MITTRE ATT&CK
+                                technique, as seen below
+                                with the inclusion of T1099 in the inclusions:
+                            </p>
+                            <img src="Sysmon_T1099.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Sysmon configuration file XML 4" /><br></br>
+
+                            <p class="lead">Although this technique has been deprecated, as seen below, hightlighting
+                                the importance of
+                                staying up to date and relevant:
+                            </p>
+                            <img src="T1099_deprecated.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Sysmon configuration file XML 4" /><br></br>
+                            <h2 class="display-6">Investigate Sysmon Logs to Find Attacker Malicious and Executable IP
+                            </h2>
+                            <p class="lead">What is an EVTX file?<br></br>
+                                The Windows XML EventLog (EVTX) format is used by Microsoft Windows, as of Windows
+                                Vista, to store system log information.
+                                The EVTX format supersedes the Windows EventLog (EVT) format as used in Windows XP.
+                                <br></br>
+                                Event log files can be found using the command line at
+                                <strong>C:\Windows\System32\winevt\Logs\</strong>, as
+                                seen in the screenshot below:
+                            </p>
+                            <img src="Evtx_1.webp" class="img-fluid" class="img-fluid" loading="lazy" shadow-1-strong
+                                rounded mb-4 style="width: 100%;"
+                                alt="Access Windows event logs from the command line" /><br></br>
+                            <p class="lead">Or, follow these steps to use Event Viewer to save either application,
+                                system, or security
+                                event log as an .evtx file:
+
+                            <ul>
+                                <li class="lead"><strong>Open the Start menu and search for “event
+                                        viewer.”</strong><em></em>
+                                </li>
+                                <li class="lead"><strong>Click Settings. On the left, click Event Viewer.</strong><em>
+                                    </em></li>
+                                <li class="lead"><strong>When the Event Viewer opens, expand Applications and Services
+                                        Logs.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Expand Windows Logs.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Right-click Application and select Save Events As.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Save the log in the EVTX format.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Right-click System and select Save Events As.</strong><em>
+                                    </em>
+                                <li class="lead"><strong>Save the log in the EVTX format.</strong><em>
+                                    </em>
+                                </li>
+                            </ul>
+
+                            </p>
+                            <p class="lead">Once Sysmon is running on the machine, and has been configured according to
+                                the
+                                needs of the individual or organization, use the following steps to locate and save the
+                                Sysmon logs in a .evtx format. We will then upload the Sysmon Logs into Splunk to
+                                analyse and
+                                search for strings which may be telling to malicious activity.
+
+                            <ul>
+                                <li class="lead"><strong>Open the Start menu and search for “event
+                                        viewer.”</strong><em></em>
+                                </li>
+                                <li class="lead"><strong>Click Settings. On the left, click Event Viewer.</strong><em>
+                                    </em></li>
+                                <li class="lead"><strong>When the Event Viewer opens, expand Applications and Services
+                                        Logs.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Expand Microsoft Logs.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Expand Windows logs.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Expand Sysmon logs.</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Right-click System and select Save Events As.</strong><em>
+                                    </em>
+                                <li class="lead"><strong>Save the log in the EVTX format.</strong><em>
+                                    </em>
+                                </li>
+                            </ul>
+
+                            </p>
+                            <p class="lead">Now we will be using Splunk enterprise to invesigate a Windows event log
+                                (.evtx) file to find
+                                malicious IP addresses (which may indicate an attacker C2). First, uplod the .evtx file
+                                into Splunk, as
+                                shown in the following screenshots:
+                            </p>
+                            <img src="Splunk_add_data.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Uploading .evtx file into Splunk enterprise" /><br></br>
+                            <img src="Evtx_in_splunk_1.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;" alt="Evtx_1 in Splunk" /><br></br>
+                            <p class="lead"><strong>Searching in Splunk.</strong> <br></br>
+                                Once the log file is uploaded into Splunk and searching commences, Splunk will
+                                automatically
+                                identify and parse the information and identify the host, source, and source type, as
+                                seen in
+                                the screenshot below:</p>
+                            <img src="Splunk_search_1.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Searching in Splunk 1" /><br></br>
+                            <p class="lead">Lets return to our scenario for a moment; we said that an
+                                attacker has gained access to the organization by delivery of a malicious office
+                                document
+                                as part of a phishing attack, the victim opened the document, enabled editing, and
+                                in this way
+                                allowed a malicious script to run as the first step in gaining entry into the
+                                organization. Thus, we are
+                                looking for the following possible Sysmon events (looking at Winword as the parent
+                                process in this case
+                                since a malicious word document was used).<br></br>
+                                The scenario detailed above is an example of a hypothesis that may be formed as
+                                part of the threat hunting process in the organization, in other words, as a threat
+                                hunter or
+                                part of a threat hunting team, we have formulated the hypothesis that the organization
+                                has been
+                                breached, and the attacker/s have used a malicious microsoft word document with a
+                                phishing email.
+                                Now we are searching for specific indicators of such an attack, using Sysmon logs and
+                                splunk
+                                to search through an event log to find these events.
+                            </p>
+                            <ul>
+                                <li class="lead"><strong>Process creation (Event ID: 1).</strong>
+                                <li class="lead"><strong>File creation (Event ID: 11).</strong>
+                                </li>
+                                <li class="lead"><strong>Network connection - as the script may connect to an IP to drop
+                                        a successive
+                                        stage in the malware event, or connect to a C & C directly (Event ID: 3).
+                                    </strong>
+
+                                </li>
+                            </ul>
+                            <p class="lead">The event and event ID in Splunk search are highlighted in the screenshot
+                                below:
+                            </p>
+                            <img src="Event_ID.webp" class="img-fluid" class="img-fluid" loading="lazy" shadow-1-strong
+                                rounded mb-4 style="width: 100%;" alt="Sysmon event ID in Splunk." /><br></br>
+                            <p class="lead">As mentioned above, we are searching for Winword.exe as a parent process
+                                according to our hypothesis, so lets enter "Winword.exe" into the search bar and search
+                                for it
+                                in the logs.
+                            </p>
+                            <img src="Winword_exe.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Searching for Winword.exe parent process in Splunk." /><br></br>
+                                <p class="lead">Scroll down to the "Interesting Fields" section on the left hand pane
+                                    of the Splunk Enterprise New Search page, for our purposes, the "Event Code" button wil be 
+                                    useful. Click on it, and a box appears tabulating the Sysmon event codes appearing in 
+                                    the logs, along with thier frequencies, and some other statistics.
+                                </p> 
+                                <img src="Event_codes_1.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Event codes in Splunk." /><br></br> 
+                                <p class="lead">Since we are interested in Event ID: 1, which is representative of a new process 
+                                    being created, lets click on it. We are then presented with the two events with the Event ID: 1
+                                </p> 
+                                <img src="Event_codes_2.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Event codes in Splunk 2." /><br></br> 
+                                <p class="lead">If we expand the first event, we see that Winword.exe has executed rundll32, along
+                                    with the exact command line, having dropped a file called "ier.dll", in other words, using a signed 
+                                    Windows application to download and run a malicious dll file, as we can see, in the user Downloads 
+                                    folder.
+                                </p> 
+                                <img src="Event_codes_3.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Event codes in Splunk 3." /><br></br> 
+                            <h2 class="display-6">Keep following me on social media to stay tuned for the follow up
+                                to
+                                this post...
+                            </h2>
+                  
+                    </section>
+                    <!--Section: Share buttons-->
+                    <section class="text-center border-top border-bottom py-4 mb-4">
+                        <p><strong>Share this with your network</strong></p>
+                        <a href="https://twitter.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </section>
+                    <!--Section: Share buttons-->
+
+                    <!--Section: Author-->
+                    <section class="border-bottom mb-4 pb-4">
+                        <div class="row">
+                            <div class="col-3">
+                                <!--<img src="IMG-9879-copy-2.webp" loading="lazy" class="img-fluid shadow-1-strong rounded"
+                            alt="Author" />-
+                    </div>-->
+
+                                <!---- <div class="col-9">-->
+                                <section class="text-left border-top border-bottom py-4 mb-4">
+                                    <p class="mb-2"><strong>Grant Knoetze</strong></p>
+                                    <p>
+                                        IT Support Specialist Cybersecurity Analyst Software Developer
+                                    </p>
+                            </div>
+
+
+                    </section>
+                    <!--Section: Author-->
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+                    <!--Section: Sidebar-->
+                    <section class="sticky-top" style="top: 80px;">
+                    </section>
+                    <!--Section: Ad-->
+                    <section class="text-center border-bottom pb-4 mb-4">
+                        <div class="bg-image hover-overlay ripple mb-4">
+                            <!---- <img src="" class="img-fluid" />-->
+                            <a href="https://github.com/Grant-Knoetze/c--red-team-code" target="_blank" rel="noopener">
+                                <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
+                            </a>
+                        </div>
+                        <h5>Useful Code for Red Teaming</h5>
+                        <p class="lead"> This is code that I wrote to help me with red teaming. Disclaimer - Nothing
+                            on this page is intended for malicious purposes, anything that you do with any code is
+                            <em>your own
+                                responsibility</em>, <b>never engage a target without written permission in the form of
+                                a signed contract.</b>
+                        </p>
+                        <a href="https://github.com/Grant-Knoetze/c--red-team-code" class="btn btn-primary m-1"
+                            role="button" rel="nofollow" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+
+
+                    </section>
+                    <!--Section: Sidebar-->
+
+                    <!--Grid column-->
+
+                    <!--Grid row-->
+
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="bg-light text-lg-start">
+        <hr class="m-0" />
+
+        <div class="text-center py-4 align-items-center">
+            <p>Follow me on social media</p>
+            <a href="https://twitter.com/KnoetzeGrant" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/Grant-Knoetze" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/grant-knoetze-563b0b1b6/" class="btn btn-primary m-1" role="button"
+                rel="nofollow" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 Copyright: Grant Knoetze
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--Footer-->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!-- Google Tag Manager -->
+    <script type="text/javascript"
+        src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FyAvnV26jgbcxptBeyJ0P1rB6D8Gp4pcXgqZAmh1c9gh8ZhfdxA4DafLZmI1xkzHmm3zxtFCJeLRHK96tqGvfmaywWn3Kty6w0MV4C805MMkGIRUnrIGrRIim13trBSPPfGPzRmeaVnCnntOIY7BHbdR36EVWuuLYGySkYSKiVtwdrU5jEZtgQh_uWXM6x8y"
+        charset="UTF-8"></script>
+    <link rel="stylesheet" crossorigin="anonymous"
+        href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9nYXJnb3lsZS5hc2Vydi5jby56YToyMDgzL2Nwc2VzczYxNDg3OTM3NzMvZG93bmxvYWQ_c2tpcGVuY29kZT0xJmZpbGU9JTJmaG9tZSUyZmdyYW50Y2NiJTJmcHVibGljX2h0bWwlMmZpbmRleC5odG1s" />
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-K4QRS88');
+    </script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FETHGQJWZF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FETHGQJWZF');
+</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4QRS88" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <!--Core Web Vitals-->
+    <script type="module">
+        import {onCLS, onINP, onLCP} from 'https://unpkg.com/web-vitals@4?module';
+        function sendToGoogleAnalytics({name, delta, id}) {
+  // Assumes the global `gtag()` function exists, see:
+  // https://developers.google.com/analytics/devguides/collection/gtagjs
+  gtag('event', name, {
+    event_category: 'Web Vitals',
+    // Google Analytics metrics must be integers, so the value is rounded.
+    // For CLS the value is first multiplied by 1000 for greater precision
+    // (note: increase the multiplier for greater precision if needed).
+    value: Math.round(name === 'CLS' ? delta * 1000 : delta),
+    // The `id` value will be unique to the current page load. When sending
+    // multiple values from the same page (e.g. for CLS), Google Analytics can
+    // compute a total by grouping on this ID (note: requires `eventLabel` to
+    // be a dimension in your report).
+    event_label: id,
+    // Use a non-interaction event to avoid affecting bounce rate.
+    non_interaction: true,
+  });
+}
+
+onCLS(sendToGoogleAnalytics);
+onINP(sendToGoogleAnalytics);
+onLCP(sendToGoogleAnalytics);
+      
+        onCLS(console.log);
+        onINP(console.log);
+        onLCP(console.log);
+      </script>
+      <!--Core Web Vitals End-->
+</body>
+
+</html>

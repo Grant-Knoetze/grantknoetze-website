@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--Google site verification-->
+    <meta name="google-site-verification" content="ZNGAVpLH57ubR17YFkS1kr9uWstVE5-tEmb0eAVlEX0" />
+    <!--End Google site verification-->
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NSLWXR2R');</script>
+    <!-- End Google Tag Manager -->
+    <!--Google Adsense-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4126413092594705"
+    crossorigin="anonymous"></script>
+     <!--End Google Adsense-->
+    <title>Advanced Red Teaming - Defense Evasion - Using C++ and Cyber Chef To Encrypt and Decrypt Using Keys and
+        Algorithms</title>
+    <meta http-equiv="x-ua-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Apple Developer and Safari Webkits-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!--Apple Developer and Safari Webkits End-->
+    <meta name="description"
+        content="This is my professional blog">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <!--<link rel="stylesheet" href="style.css" />-->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSLWXR2R"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--Main Navigation-->
+    <header>
+        <!-- Intro settings -->
+        <style>
+            #intro {
+                /* Margin to fix overlapping fixed navbar */
+                margin-top: 58px;
+            }
+
+            @media (max-width: 991px) {
+                #intro {
+                    /* Margin to fix overlapping fixed navbar */
+                    margin-top: 45px;
+                }
+            }
+        </style>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <!--Container wrapper-->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!--Left links-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Advanced Red Teaming - APT and Adversary Emulation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="phishing.html">Phishing Techniques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="initial_access.html">Initial Access Techniques</a>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="purple_team_cyber_range.html">Purple Team Cyber Range</a>
+                        </li>-->
+                       <li class="nav-item">
+                            <a class="nav-link" href="maintaining_persistence.html">Maintaining Persistence</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="defense_evasion.html">Defense Evasion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="incident_response_pshell_hunting.html">Incident Response - PowerShell Hunting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="incident_response_detecting_malicious_documents_with_sysmon.html">Incident Response - Detecting Malicious Documents With Sysmon</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mirt_basic_static_analysis.html">Malware Incident Response - Basic Static Analysis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="memory_forensics.html">Incident Response - Memory Forensics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index_base64.html">Base 64 Encoder/Decoder</a>
+                        </li>
+                    </ul>
+                    <!--Left links-->
+                </div>
+                <!-- Collapsible wrapper -->
+        </nav>
+        <!-- Navbar -->
+        
+        <div id="intro" class="p-5 text-center bg-light">
+
+            <h1 class="display-5">Advanced Red Teaming - Defense Evasion - Using C++ and Cyber Chef To Encrypt and Decrypt Using Keys and
+                Algorithms</h1>
+
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <!--Main Navigation-->
+    <!--Main layout-->
+
+    <main class="mt-4 mb-5">
+        <div class="container">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-8 mb-4">
+                    <!--Section: Post mdb-->
+                    <section class="border-bottom mb-4">
+                        <!---- <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg" class="img-fluid shadow-2-strong rounded mb-4" alt="" /> -->
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
+                                <img src="IMG-9879-copy-2.webp" class="rounded shadow-1-strong me-2" height="35" alt=""
+                                    loading="lazy" loading="lazy" />
+                                <span><strong>Blog by: Grant Knoetze</strong> </span>
+                                <!---- <a href="" class="text-dark">Grant Knoetze</a> -->
+                            </div>
+                    </section>
+                    <!--Section: Post mdb-->
+
+                    <!--Section: Text-->
+                    <section>
+                        <div class="Introduction">
+                            <h2 class="display-6">Defense Evasion forms part of strategically hiding
+                                or obfuscating important information, for example: strings.
+                            </h2>
+                            <br></br>
+                            <ul>
+                                <li class="lead"><strong>Advanced - </strong><em>Targeted, coordinated, purposeful</em>
+                                </li>
+                                <li class="lead"><strong>Persistent - </strong><em>Month after month, year after
+                                        year</em></li>
+                                <li class="lead"><strong>Threat - </strong><em>Attacker with intent, opportunity, and
+                                        capability</em>
+                                </li>
+                            </ul>
+
+                            <p class="lead"><em>Cyber-Kill-Chain definition courtesy of: </em><strong> Lockheed Martin.
+                                </strong>
+                            </p>
+                            <a href="https://www.lockheedmartin.com/en-us/capabilities/cyber/cyber-kill-chain.html"
+                                target="_blank" rel="noopener">Lockheed Martin Cyber Kill Chain</a><br></br>
+                            <p class="lead">There are 3 main <em>tactics</em> employed for defense evasion, namely;
+
+                            <ul>
+                                <li class="lead"><strong><em>Hiding from the defenders - Techniques to encrypt and
+                                            obfuscate
+                                            data are employed.</em></strong></li>
+                                <li class="lead"><strong><em>Blending in with the defenders - Disguise the malicious
+                                            activity as legitimate.
+                                    </strong></em></li>
+                                <li class="lead"><strong><em>Attacking the defenses, defense
+                                            infrastructure.</strong></em>
+                                </li>
+                            </ul>
+
+                            </p>
+
+                            <h2 class="display-6">Using C++ to Encrypt and Decrypt a String (URL or IP address for this
+                                exercise)</h2>
+                            <p class="lead"> String encryption can be added into the C++ RedTeamAgent trojan software,
+                                as
+                                seen in the code below:
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/07d08e8c94e9093cd602316d4cbde071.js"></script>
+                            <br></br>
+                            <h2 class="display-6">File Signature and Heuristics Bypass: Strings Encryption</h2>
+                            <p class="lead"><em>Strings are important to blue team, malware analysts and
+                                    anyone doing any defensive security, and as such are commonly obfuscated
+                                    using encryption by the attacking side. For the attacker, this can be
+                                    a double edged sword as IDS/IPS and especially machine learning based tools will
+                                    immediately flag encrypted strings (especially domains and URL's) as
+                                    suspicious.<br></br>
+                                </em>
+                                Strings are a good place for an investigator to begin looking for clues in text.
+                                This step may form part of the basic static analysis of a malware sample.
+                                For the sake of understanding this concept on a deeper level, let us
+                                make an example of using strings to understand more about the malware...
+                            </p> <br></br>
+                            <div class="Strings Encryption">
+                                <h2 class="display-6">Important Strings
+                                </h2>
+                                <p class="lead">Binary data contains strings which may be important to the SOC analyst
+                                    or
+                                    incident responder, and
+                                    certainly to the malware analyst. The analyst/responder will have to extract
+                                    meaningful
+                                    strings from a set of data. As an attacker, we should have an awareness of what our
+                                    targets defenders will be looking for, and certatinly we want to keep key pieces of
+                                    information such as IP addresses obfuscated to delay and prevent our detection, and
+                                    the
+                                    detection of our activities. A real world APT group will be interested in
+                                    obfuscation of
+                                    text and other string data that has to be transmitted over a network.
+                                </p>
+
+                                <ul>
+                                    <li class="lead">Commands for command prompt CLI (cmd.exe etc) although this is
+                                        suspicious and almost certainly will be flagged by ML tool</li>
+                                    <li class="lead">Command and control (C2) servers or other functional URL's</li>
+                                    <li class="lead">Registry entries
+                                    </li>
+                                    <li class="lead">printf* strings</li>
+                                    <li class="lead">API's</li>
+                                    <li class="lead">Processes, mutexes, file paths, passwords, keys, and PowerShell
+                                        commands</li>
+                                </ul>
+                            </div>
+                            <br></br>
+                            <h2 class="display-6">File Signature and Heuristics Bypass: API Encryption</h2>
+                            <p class="lead">API's can speak to the functionality of the malware,
+                                <em>GetAsyncKeyState</em>
+                                for example, is used by keyloggers primarily. With C++ this is prominent, take the
+                                following
+                                code snippet for example:
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/33ff2e0f7b1df9712eea225aa8561a24.js"></script>
+                            <p class="lead">
+                                The function you see in the Gist above is a snippet taken from a custom red team trojan
+                                of
+                                mine; <strong>Disclaimer - <em>All of my code is meant for legitimate security
+                                        professional
+                                        use, none of it is intended for malicious purposes, and
+                                        anything that you do with any code is entirely your own responsibility </em>
+                                </strong> - Notice the API UpdateRegistry with its arguments, is common for C++ code,
+                                and
+                                the code written in the languages that C++ provides this vital link to Windows API's and
+                                functions to. These would obviously be obfuscated, or be part of a false trail that does
+                                not
+                                produce anything vital to discovering the actual functionality and authors of the
+                                malware.
+                                All of your C++ RedTeamAgent API's are in the executable file in the <em>import
+                                    table</em>,
+                                which is very visible to
+                                the malware analyst looking at the .exe file.
+                                All API's are made equal (in that there are no malicious API's, only the people using
+                                them),
+                                there are however API's that
+                                are commonly used in malware (represent key functionality), and are thus flagged by
+                                machine
+                                learning and AI tools especially easily, commonly included
+                                in this list are API's that will allow the program to communicate over the internet, for
+                                example:
+                            </p>
+                            <ul>
+                                <li class="lead">HttpOpenRequest, HttpSendRequest and other Wininet functions</li>
+                                <li class="lead">GetAsyncKeyState, and other API's and functions widely used by
+                                    key-loggers
+                                </li>
+                                <li class="lead">DownloadUrlToFile
+                                </li>
+
+                            </ul>
+
+                            <p class="lead">In combination with searching for important strings and decrypting them (to
+                                find
+                                URL's and domains, for example), an analyst
+                                can begin to understand how the program works. As an attacker, we should employ tactics
+                                and
+                                techniques to evade defenses and detection based on <em>our</em>
+                                understanding of how defenders and defensive and forensic investigative services and
+                                analysts work (these are the people we are testing as red team operators). We should;
+
+                            </p>
+                            <ul>
+                                <li class="lead">Encrypt API's that represent key functionality</li>
+                                <li class="lead">Dynamically load API's</li>
+                            </ul>
+                            <br></br>
+                            <h2 class="display-6">Encrypt API's that represent key functionality in C++
+                            </h2>
+
+
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/b65d68fd3bd43d72236410f5a1a60642.js"></script>
+                            <p class="lead">RC4 encryption added to the RedTeamAgent as seen in the Gist below, there
+                                are
+                                accompanying RC4 header and .cpp files that are part of the project solution, these
+                                types of
+                                encryption
+                                algorithm open source projects are available on GitHub. They are relatively easy to
+                                implement in
+                                source code, as seen below.
+
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/66a93d7fc034cd8df41ab3563696a72e.js"></script>
+
+                            <p class="lead">The RC4 key that is used to encrypt the API (string) can be generated using
+                                CyberChef.<em></em>
+                            </p>
+                            <img src="Cyber_chef_rc4_encryption.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;" alt="CyberChef" /><br></br>
+                            <p class="lead">And the output below...
+                            </p>
+                            <img src="Running_red_team_agent.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Running_red_team_agent" /><br></br>
+                            <br></br>
+                            <p class="lead">Message Box API in C++, using the useful structures feature in C++. The
+                                engineer could create
+                                a structure to get APIs, and group the values together.
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/f0f543fd24d22080969047baeeeb6636.js"></script>
+                            <p class="lead">And the output below...
+                            </p>
+                            <img src="Message_box.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;"
+                                alt="Message Box API in C++.." /><br></br>
+                            <p class="lead">Another example of the message box API without the structure for the APIs.
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/e0fcef61d5be3f173469595b12de4b1e.js"></script>
+                        </div>
+                        <br></br>
+                        <div class="Blending In">
+                            <h2 class="display-6">Blending in...Or: <strong><em>Making the program look as legitimate, and as harmless as possible...</em></strong>
+                              
+
+                            </h2>
+                            <p class="lead">In order to blend in (which is the preferred tactic for defense evasion),
+                                the following actions may be implemented/included in your C++ code. 
+                                The analyst will have false positives to clear that will have to be emulated 
+                                to remain undetected.
+                            </p>
+
+                            <ul>
+                                <li class="lead">Include legitimate APIs </li>
+                                <li class="lead">Registering a window
+
+                                </li>
+                                <li class="lead">Calling DirectX
+                                </li>
+                                <li class="lead">Opening GL
+                                </li>
+                                <li class="lead">Initialize sound libraries
+                                </li>
+                                <li class="lead">Include a legitimate application taken from GitHub.
+                                </li>
+                            </ul>
+                            <h2 class="display-6">Keep following me on social media to stay tuned for the follow up to
+                                this post...
+                            </h2>
+                            <br></br>
+                            <p class="lead"></p>
+                            <br></br>
+                            <p class="lead"></p>
+                            <br></br>
+                           
+                    </section>
+                    <!--Section: Share buttons-->
+                    <section class="text-center border-top border-bottom py-4 mb-4">
+                        <p><strong>Share this with your network</strong></p>
+                        <a href="https://twitter.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </section>
+                    <!--Section: Share buttons-->
+
+                    <!--Section: Author-->
+                    <section class="border-bottom mb-4 pb-4">
+                        <div class="row">
+                            <div class="col-3">
+                                <!--<img src="IMG-9879-copy-2.webp" loading="lazy" class="img-fluid shadow-1-strong rounded"
+                            alt="Author" />-
+                    </div>-->
+
+                                <!---- <div class="col-9">-->
+                                <section class="text-left border-top border-bottom py-4 mb-4">
+                                    <p class="mb-2"><strong>Grant Knoetze</strong></p>
+                                    <p>
+                                        IT Support Specialist Cybersecurity Analyst Software Developer
+                                    </p>
+                            </div>
+
+
+                    </section>
+                    <!--Section: Author-->
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+                    <!--Section: Sidebar-->
+                    <section class="sticky-top" style="top: 80px;">
+                    </section>
+                    <!--Section: Ad-->
+                    <section class="text-center border-bottom pb-4 mb-4">
+                        <div class="bg-image hover-overlay ripple mb-4">
+                            <!---- <img src="" class="img-fluid" />-->
+                            <a href="https://github.com/Grant-Knoetze/c--red-team-code" target="_blank" rel="noopener">
+                                <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
+                            </a>
+                        </div>
+                        <h5>Useful Code for Red Teaming</h5>
+                        <p class="lead"> This is code that I wrote to help me with red teaming. Disclaimer - Nothing
+                            on this page is intended for malicious purposes, anything that you do with any code is
+                            <em>your own
+                                responsibility</em>, <b>never engage a target without written permission in the form of
+                                a signed contract.</b>
+                        </p>
+                        <a href="https://github.com/Grant-Knoetze/c--red-team-code" class="btn btn-primary m-1"
+                            role="button" rel="nofollow" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+
+
+                    </section>
+                    <!--Section: Sidebar-->
+
+                    <!--Grid column-->
+
+                    <!--Grid row-->
+
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="bg-light text-lg-start">
+        <hr class="m-0" />
+
+        <div class="text-center py-4 align-items-center">
+            <p>Follow me on social media</p>
+            <a href="https://twitter.com/KnoetzeGrant" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/Grant-Knoetze" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/grant-knoetze-563b0b1b6/" class="btn btn-primary m-1" role="button"
+                rel="nofollow" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 Copyright: Grant Knoetze
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--Footer-->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!-- Google Tag Manager -->
+    <script type="text/javascript"
+        src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FyAvnV26jgbcxptBeyJ0P1rB6D8Gp4pcXgqZAmh1c9gh8ZhfdxA4DafLZmI1xkzHmm3zxtFCJeLRHK96tqGvfmaywWn3Kty6w0MV4C805MMkGIRUnrIGrRIim13trBSPPfGPzRmeaVnCnntOIY7BHbdR36EVWuuLYGySkYSKiVtwdrU5jEZtgQh_uWXM6x8y"
+        charset="UTF-8"></script>
+    <link rel="stylesheet" crossorigin="anonymous"
+        href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9nYXJnb3lsZS5hc2Vydi5jby56YToyMDgzL2Nwc2VzczYxNDg3OTM3NzMvZG93bmxvYWQ_c2tpcGVuY29kZT0xJmZpbGU9JTJmaG9tZSUyZmdyYW50Y2NiJTJmcHVibGljX2h0bWwlMmZpbmRleC5odG1s" />
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-K4QRS88');
+    </script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FETHGQJWZF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FETHGQJWZF');
+</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4QRS88" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+ <!--Core Web Vitals-->
+<script type="module">
+    import {onCLS, onINP, onLCP} from 'https://unpkg.com/web-vitals@4?module';
+    function sendToGoogleAnalytics({name, delta, id}) {
+  // Assumes the global `gtag()` function exists, see:
+  // https://developers.google.com/analytics/devguides/collection/gtagjs
+  gtag('event', name, {
+    event_category: 'Web Vitals',
+    // Google Analytics metrics must be integers, so the value is rounded.
+    // For CLS the value is first multiplied by 1000 for greater precision
+    // (note: increase the multiplier for greater precision if needed).
+    value: Math.round(name === 'CLS' ? delta * 1000 : delta),
+    // The `id` value will be unique to the current page load. When sending
+    // multiple values from the same page (e.g. for CLS), Google Analytics can
+    // compute a total by grouping on this ID (note: requires `eventLabel` to
+    // be a dimension in your report).
+    event_label: id,
+    // Use a non-interaction event to avoid affecting bounce rate.
+    non_interaction: true,
+  });
+}
+
+onCLS(sendToGoogleAnalytics);
+onINP(sendToGoogleAnalytics);
+onLCP(sendToGoogleAnalytics);
+  
+    onCLS(console.log);
+    onINP(console.log);
+    onLCP(console.log);
+  </script>
+  <!--Core Web Vitals End-->
+</body>
+
+</html>

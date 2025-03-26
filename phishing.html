@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Google site verification-->
+    <meta name="google-site-verification" content="ZNGAVpLH57ubR17YFkS1kr9uWstVE5-tEmb0eAVlEX0" />
+    <!--End Google site verification-->
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NSLWXR2R');</script>
+    <!-- End Google Tag Manager -->
+    <!--Google Adsense-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4126413092594705"
+    crossorigin="anonymous"></script>
+     <!--End Google Adsense-->
+    <title>Advanced Red Teaming - Phishing Techniques</title>
+    <meta http-equiv="x-ua-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Apple Developer and Safari Webkits-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!--Apple Developer and Safari Webkits End-->
+    <meta name="description"
+        content="This is my professional blog.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="mdb.min.css" />
+    <!-- Custom styles -->
+    <!--<link rel="stylesheet" href="style.css" />-->
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSLWXR2R"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--Main Navigation-->
+    <header>
+        <!-- Intro settings -->
+        <style>
+            #intro {
+                /* Margin to fix overlapping fixed navbar */
+                margin-top: 58px;
+            }
+
+            @media (max-width: 991px) {
+                #intro {
+                    /* Margin to fix overlapping fixed navbar */
+                    margin-top: 45px;
+                }
+            }
+        </style>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <!--Container wrapper-->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!--Left links-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Advanced Red Teaming - APT and Adversary Emulation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="phishing.html">Phishing Techniques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="initial_access.html">Initial Access Techniques</a>
+                        </li>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="purple_team_cyber_range.html">Purple Team Cyber Range</a></li>
+                        </li>-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="maintaining_persistence.html">Maintaining Persistence</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="defense_evasion.html">Defense Evasion</a>        
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="incident_response_pshell_hunting.html">Incident Response - PowerShell Hunting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="incident_response_detecting_malicious_documents_with_sysmon.html">Incident Response - Detecting Malicious Documents With Sysmon</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mirt_basic_static_analysis.html">Malware Incident Response - Basic Static Analysis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="memory_forensics.html">Incident Response - Memory Forensics</a>
+                        </li>
+                    </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index_base64.html">Base 64 Encoder/Decoder</a>
+                    </li>
+                    <!--Left links-->
+                </div>
+                <!-- Collapsible wrapper -->
+        </nav>
+        <!-- Navbar -->
+        
+        <div id="intro" class="p-5 text-center bg-light">
+            <h1 class="display-5">Advanced Red Teaming - Phishing Mastery</h1>
+
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <!--Main Navigation-->
+    <!--Main layout-->
+    <main class="mt-4 mb-5">
+        <div class="container">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-8 mb-4">
+                    <!--Section: Post mdb-->
+                    <section class="border-bottom mb-4">
+
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
+                                <img src="IMG-9879-copy-2.webp" class="rounded shadow-1-strong me-2" height="35"
+                                    alt="Author avatar" loading="lazy" loading="lazy" />
+                                <span><strong> Blog by: Grant Knoetze</strong></span>
+                            </div>
+
+
+                    </section>
+                    <!--Section: Post mdb-->
+
+                    <!--Section: Text-->
+                    <section>
+                        <div class="Configuring Gophish">
+                            <h2 class="display-6">Configuring Gophish to Work With Sendgrid
+                            </h2>
+                            <p class="lead">Gophish cannot send emails on its own, it is a service for managing phishing
+                                campaigns. We have chosen Sendgrid to use as our SMTP (simple mail transfer protocol)
+                                service. We will have to link it with Gophish. Choose SMTP relay
+                                in Sendgrid. You will need to create a sender profile inside your chosen SMTP service
+                                using your phishing domain. To do this you will have to create CNAME (canonical name)
+                                records in your phishing domain hosted zone inside
+                                AWS Route53. Configure your DNS records so that your phishing domain resolves to the IP
+                                address of your Gophish server.
+                            </p>
+
+                            <p class="lead">Send yourself a test email once you have properly configured your SMTP
+                                service to work with your phishing domain.
+                            </p>
+
+
+                            <img src="Gophish_test_email.webp" class="img-fluid" class="img-fluid" shadow-1-strong
+                                loading="lazy" rounded mb-4 style="width: 100%;" alt="Snapshot of test email" /><br></br>
+
+                            <p class="lead">Once your test email has been delivered to your inbox, you can now set up
+                                your email template. You can copy any email original, or source that fits according to
+                                your needs. Gophish makes this process simple and the template
+                                is easily modified once it has been imported. You can then modify and edit it according
+                                to your needs.
+                            </p>
+
+
+                            <img src="Test_email_received.webp" class="img-fluid" class="img-fluid" shadow-1-strong
+                                loading="lazy" rounded mb-4 style="width: 100%; "
+                                alt="Snapshot of test email recieved from phishing domain" /><br></br>
+                        </div>
+                        <div class="Using Evilginx2 to bypass 2FA">
+                            <h2 class="display-6">Using Evilginx2 to Steal Login Credentials and to Bypass Two Factor
+                                Authentication
+                            </h2>
+                            <p class="lead">Gophish is not able to grab passwords, Evilginx2 is a tool made for
+                                replicating sign-in pages. We will automate the process with Terraform and Evilginx2
+                                will be set up as part of our infrastructure in our cloud based Linux
+                                VM. Evilginx2 is able to grab passwords and bypass time-based token two factor
+                                authentication measures, but is not able to bypass a FIDO U2F zero trust security key.
+                                Evilginx2 works as a proxy, allowing the user to have
+                                a seamless experience. Evilginx2 can be used to grab cookies and also detects incorrect
+                                passwords. As we have done with the Caldera-C2, we will SSH to log into Evilginx2 in the
+                                EC2 VM.
+                            </p>
+                            <h2 class="display-6">SSH Into Evilginx2
+                            </h2>
+                            <p class="lead">Using the IP address created when the EC2 build was created using Terraform,
+                                SSH into Evilginx2, just as you did with the Caldera-C2.
+                            </p>
+                            <h2 class="display-6">Change Directory Into Evilginx2
+                            </h2>
+                            <p class="lead">Change directory into Evilginx2 using "cd Evilginx2/" command, then change
+                                Directory Into bin/ using the "cd bin/" Command
+                            </p>
+
+
+                            <img src="Evilginx2_cd.webp" class="img-fluid" class="img-fluid" shadow-1-strong rounded
+                                mb-4 loading="lazy" style="width: 100%;" alt="Snapshot of Change directory into Bin" /><br></br>
+
+                            <h2 class="display-6">Change Directory Using Sudo from The Current Directory Into Phishlets
+                            </h2>
+                            <p class="lead">Change directory into phishlets using the "sudo ./evilginx -p ../phishlets/"
+                                command.
+                            </p>
+
+
+                            <img src="Move_phishlets.webp" class="img-fluid" class="img-fluid" shadow-1-strong rounded
+                                mb-4 loading="lazy" style="width: 100%; " alt="Snapshot of move to phishlets" /><br></br>
+
+                            <h2 class="display-6">Configure Your Phishing Domains to Resolve to The Evilginx2 IP Address
+                            </h2>
+                            <p class="lead">Use the "config" command to configure the Evilginx2 IP address and your
+                                phishing domain (mine is Linkedinsolutions.com as seen below), and configure your chosen
+                                phishing domain to connect to the relevant phishlet. For my linkedinsolutions.com
+                                obviously I will use the Linkedin phishlet. Enable the phishlet.
+                            </p>
+
+                            <img src="Linkedinsolutions.com_connected_to_linkedin_phishlet.webp" class="img-fluid"
+                                class="img-fluid" shadow-1-strong rounded mb-4 style="width: 100%"
+                                alt="Snapshot of config phishlet" /><br></br>
+
+
+                            <img src="Enable_phishlet.webp" class="img-fluid" class="img-fluid" shadow-1-strong rounded
+                                mb-4 loading="lazy" style="width: 100%; " alt="Snapshot of enabled phishlet" /><br></br>
+
+                            <p class="lead">The phishlet is now connected to our domain and enabled. An SSL certificate
+                                has also been created. We now have a functional proxy of Linkedin for our social
+                                engineering purposes.
+                            </p>
+                            <h2 class="display-6">Create the Lure URL
+                            </h2>
+                            <p class="lead">Use the "lures create Linkedin" command to create the URL, and then use the
+                                "lures get-url 0" command to print the URL to the terminal for use. For demonstration
+                                purposes, I will copy and paste it into an incognito browser
+                                and enter credentials to illustrate how they are captured, as well as cookies from the
+                                session.
+
+                            </p>
+
+                            <img src="Create_lures_get_url.webp" class="img-fluid" class="img-fluid" shadow-1-strong
+                                rounded mb-4 loading="lazy" loading="lazy" style="width: 100%;"
+                                alt="Snapshot of create lures and get lure" /><br></br>
+
+                            <p class="lead">As illustrated below, as a complete proxy, the user can navigate anywhere on
+                                the page and will still be served the Linkedin page. On the login page, as the user
+                                enters their credentials, they will be captured and printed out
+                                in our terminal.
+                            </p>
+
+                            <img src="Signup_linkedin.webp" class="img-fluid" class="img-fluid" shadow-1-strong rounded
+                                mb-4 loading="lazy" style="width: 100%;" alt="Snapshot of moving aroung proxy" /><br></br>
+
+                            <img src="linkedinsolutions_landing_page.webp" class="img-fluid" class="img-fluid"
+                                shadow-1-strong rounded mb-4 loading="lazy" style="width: 100%; "
+                                alt="Snapshot of Landing page" /><br></br>
+                            <p class="lead">The credentials entered by the victim into your fake page will be captured
+                                and printed out in the terminal, as seen below.
+                            </p>
+
+                            <img src="Captured_credentials.webp" class="img-fluid" class="img-fluid" shadow-1-strong
+                                rounded mb-4 loading="lazy" style="width: 100%;"
+                                alt="Snapshot of captured credentials" /><br></br>
+                        </div>
+
+
+                    </section>
+                    <!--Section: Share buttons-->
+                    <section class="text-center border-top border-bottom py-4 mb-4">
+                        <p><strong>Share with your network</strong></p>
+                        <a href="https://twitter.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+
+                    </section>
+                    <!--Section: Share buttons-->
+
+                    <!--Section: Author-->
+                    <section class="border-bottom mb-4 pb-4">
+                        <div class="row">
+                            <div class="col-3">
+                               <!---- <img src="IMG-9879-copy-2.webp" class="img-fluid shadow-1-strong rounded" loading="lazy"
+                                    alt="Author avatar" />
+                            </div>-->
+
+                            <!---- <div class="col-9">-->
+                                <section class="text-left border-top border-bottom py-4 mb-4">
+                                    <p class="mb-2"><strong>Grant Knoetze</strong></p>
+                                    <p>
+                                        IT Support Specialist Cybersecurity Analyst Software Developer
+                                    </p>
+                                </div></section>
+                    <!--Section: Author-->
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+                    <!--Section: Sidebar-->
+                    <section class="sticky-top" style="top: 80px;">
+                    </section>
+                    <!--Section: Ad-->
+                    <section class="text-center border-bottom pb-4 mb-4">
+                        <div class="bg-image hover-overlay ripple mb-4">
+                            <!---- <img src="" class="img-fluid" />-->
+                            <a href="https://github.com/Grant-Knoetze/c--red-team-code" target="_blank">
+                                <div class="mask" rel="noopener" style="background-color: rgba(57, 192, 237, 0.2);">
+                                </div>
+                            </a>
+                        </div>
+                        <h5>Use Visual Studio to Get Icons from shell32.dll</h5>
+                        <p class="lead"> Changing the shortcut icon of a .lnk file disguised as another file is a
+                            clever way to trick the target into executing a malicious program (download and
+                            execute). The icon will appear on the targets machine as <em>an icon from that version
+                                of Windows.</em> For example, if you are using Windows 10, when your payload is
+                            executed on the target machine, if the target is using Windows 11 the icon will be a
+                            Windows 11 icon on the target machine. Disclaimer
+                            - Nothing on this page is intended for malicious purposes, anything that you do with any
+                            code is <em>your own
+                                responsibility</em>, <b>never engage a target without written permission in the form of
+                                    a signed contract.</b>
+
+                    </section>
+                    <!--Section: Sidebar-->
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+    </main>
+    <!--Main layout-->
+    </section>
+    <!--Footer-->
+    <footer class="bg-light text-lg-start">
+        <hr class="m-0" />
+
+        <div class="text-center py-4 align-items-center">
+            <p>Follow me on social media</p>
+            <a href="https://twitter.com/KnoetzeGrant" rel="noopener" class="btn btn-primary m-1" role="button"
+                rel="nofollow" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/Grant-Knoetze" rel="noopener" class="btn btn-primary m-1" role="button"
+                rel="nofollow" target="_blank">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/grant-knoetze-563b0b1b6/" rel="noopener" class="btn btn-primary m-1"
+                role="button" rel="nofollow" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 Copyright: Grant Knoetze
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--Footer-->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!-- Google Tag Manager -->
+    <script type="text/javascript"
+        src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FyAvnV26jgbcxptBeyJ0P1rB6D8Gp4pcXgqZAmh1c9gh8ZhfdxA4DafLZmI1xkzHmm3zxtFCJeLRHK96tqGvfmaywWn3Kty6w0MV4C805MMkGIRUnrIGrRIim13trBSPPfGPzRmeaVnCnntOIY7BHbdR36EVWuuLYGySkYSKiVtwdrU5jEZtgQh_uWXM6x8y"
+        charset="UTF-8"></script>
+    <link rel="stylesheet" crossorigin="anonymous"
+        href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9nYXJnb3lsZS5hc2Vydi5jby56YToyMDgzL2Nwc2VzczYxNDg3OTM3NzMvZG93bmxvYWQ_c2tpcGVuY29kZT0xJmZpbGU9JTJmaG9tZSUyZmdyYW50Y2NiJTJmcHVibGljX2h0bWwlMmZpbmRleC5odG1s" />
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-K4QRS88');
+    </script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FETHGQJWZF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FETHGQJWZF');
+</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4QRS88" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <!--Core Web Vitals-->
+<script type="module">
+    import {onCLS, onINP, onLCP} from 'https://unpkg.com/web-vitals@4?module';
+    function sendToGoogleAnalytics({name, delta, id}) {
+  // Assumes the global `gtag()` function exists, see:
+  // https://developers.google.com/analytics/devguides/collection/gtagjs
+  gtag('event', name, {
+    event_category: 'Web Vitals',
+    // Google Analytics metrics must be integers, so the value is rounded.
+    // For CLS the value is first multiplied by 1000 for greater precision
+    // (note: increase the multiplier for greater precision if needed).
+    value: Math.round(name === 'CLS' ? delta * 1000 : delta),
+    // The `id` value will be unique to the current page load. When sending
+    // multiple values from the same page (e.g. for CLS), Google Analytics can
+    // compute a total by grouping on this ID (note: requires `eventLabel` to
+    // be a dimension in your report).
+    event_label: id,
+    // Use a non-interaction event to avoid affecting bounce rate.
+    non_interaction: true,
+  });
+}
+
+onCLS(sendToGoogleAnalytics);
+onINP(sendToGoogleAnalytics);
+onLCP(sendToGoogleAnalytics);
+    onCLS(console.log);
+    onINP(console.log);
+    onLCP(console.log);
+  </script>
+  <!--Core Web Vitals End-->
+</body>
+
+
+</html>

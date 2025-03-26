@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--Google site verification-->
+    <meta name="google-site-verification" content="ZNGAVpLH57ubR17YFkS1kr9uWstVE5-tEmb0eAVlEX0" />
+    <!--End Google site verification-->
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NSLWXR2R');</script>
+    <!-- End Google Tag Manager -->
+    <!--Google Adsense-->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4126413092594705"
+    crossorigin="anonymous"></script>
+     <!--End Google Adsense-->
+    <title>Advanced Purple Teaming - Incident Response - PowerShell Hunting</title>
+    <meta http-equiv="x-ua-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Apple Developer and Safari Webkits-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!--Apple Developer and Safari Webkits End-->
+    <meta name="description"
+        content="This is my professional blog.">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+    <!-- Google Fonts Roboto -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css" rel="stylesheet" />
+    <!--<link rel="stylesheet" href="mdb.min.css" />-->
+    <!-- Custom styles -->
+    <!--<link rel="stylesheet" href="style.css" />-->
+</head>
+
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NSLWXR2R"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!--Main Navigation-->
+    <header>
+        <!-- Intro settings -->
+        <style>
+            #intro {
+                /* Margin to fix overlapping fixed navbar */
+                margin-top: 58px;
+            }
+
+            @media (max-width: 991px) {
+                #intro {
+                    /* Margin to fix overlapping fixed navbar */
+                    margin-top: 45px;
+                }
+            }
+        </style>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <!--Container wrapper-->
+            <div class="container-fluid">
+                <!-- Toggle button -->
+                <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <!--Left links-->
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Advanced Red Teaming - APT and Adversary Emulation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="phishing.html">Phishing Techniques</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="initial_access.html">Initial Access Techniques</a>
+                        <!--<li class="nav-item">
+                            <a class="nav-link" href="purple_team_cyber_range.html">Purple Team Cyber Range</a>
+                        </li>-->
+                         <li class="nav-item"></li>
+                            <a class="nav-link" href="maintaining_persistence.html">Maintaining Persistence</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="defense_evasion.html">Defense Evasion</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="incident_response_pshell_hunting.html">Incident Response -
+                                PowerShell Hunting</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"
+                                href="incident_response_detecting_malicious_documents_with_sysmon.html">Incident
+                                Response - Detecting Malicious Documents With Sysmon</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="mirt_basic_static_analysis.html">Malware Incident Response - Basic Static Analysis</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="memory_forensics.html">Incident Response - Memory Forensics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index_base64.html">Base 64 Encoder/Decoder</a>
+                        </li>
+                    </ul>
+
+                    <!--Left links-->
+                </div>
+                <!-- Collapsible wrapper -->
+        </nav>
+        <!-- Navbar -->
+
+        <div id="intro" class="p-5 text-center bg-light">
+
+            <h1 class="display-5">Incident Response - PowerShell Hunting</h1>
+
+        </div>
+        <!-- Jumbotron -->
+    </header>
+    <!--Main Navigation-->
+    <!--Main layout-->
+
+    <main class="mt-4 mb-5">
+        <div class="container">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-md-8 mb-4">
+                    <!--Section: Post mdb-->
+                    <section class="border-bottom mb-4">
+                        <!---- <img src="https://mdbootstrap.com/img/Photos/Slides/img%20(144).jpg" class="img-fluid shadow-2-strong rounded mb-4" alt="" /> -->
+
+                        <div class="row align-items-center mb-4">
+                            <div class="col-lg-6 text-center text-lg-start mb-3 m-lg-0">
+                                <img src="IMG-9879-copy-2.webp" class="rounded shadow-1-strong me-2" height="35" alt=""
+                                    loading="lazy" loading="lazy" />
+                                <span><strong>Blog by: Grant Knoetze</strong> </span>
+                                <!---- <a href="" class="text-dark">Grant Knoetze</a> -->
+                            </div>
+                    </section>
+                    <!--Section: Post mdb-->
+
+                    <!--Section: Text-->
+                    <section>
+                        <div class="Introduction">
+                            <h2 class="display-6">Use PowerShell to Remote Into a Machine for Investigation as an
+                                Alternative to RDP,
+                                to Protect from
+                                the Threat of Credential Theft by the Attacker when Remoting Into a Machine for
+                                Investigation
+                            </h2>
+                            <br></br>
+                            <p class="lead"><em>Incident Response Process: </em><strong>
+                                </strong>
+                            </p>
+                            <ul>
+                                <li class="lead"><strong>Preparation</strong><em></em>
+                                </li>
+                                <li class="lead"><strong>Detection and analysis</strong><em>
+                                    </em></li>
+                                <li class="lead"><strong>Containment, eradication, recovery</strong><em>
+                                    </em>
+                                </li>
+                                <li class="lead"><strong>Post incident activity, including reporting and communication
+                                        with stakeholders</strong><em>
+                                    </em>
+                                </li>
+                            </ul>
+
+                            <p class="lead"><em>Incident response process courtesy of NIST (US National Institute for
+                                    Standards and Technology): </em><strong>
+                                </strong>
+                            </p>
+                            <a href="https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-61r2.pdf"
+                                target="_blank" rel="noopener">NIST computer security incident handling guide</a>
+                            <br></br>
+                            <p class="lead">Why PowerShell?
+                            <ul>
+                                <li class="lead"><strong><em>Gives ability to dive deep into the system.</em></strong>
+                                </li>
+                                <li class="lead"><strong><em>PowerShell gives the ability to automate this process
+                                            across scale.
+                                    </strong></em></li>
+                                <li class="lead"><strong><em>PowerShell is a secure remoting protocol</strong></em>
+                                </li>
+                            </ul>
+                            </p>
+                            <h2 class="display-6">Enable PowerShell Remoting</h2>
+                            <p class="lead">Follow the steps illustrated in the series of snapshots
+                                below to enable PowerShell remoting on your home network or any other network
+                                or machine that is not part of a
+                                domain or Active Directory...
+                            </p>
+                            <p class="lead">First, enable PSRemoting and set trusted hosts to all 
+                                by using the wildcard character (*), you can also set trusted hosts 
+                                by IP address or computer name.
+                            </p>
+
+                            <img src="Pshell_remoting_B1.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;" alt="Enable PSRemoting and set trusted hosts." /><br></br>
+                                <p class="lead">Next, enter the PSSession using the Enter-PSSession cmdlet as seen below,
+                                    use the target machines IP address or host name, and the user account you wish to access.
+                                    The message box that appears will have the user account that was just supplied, enter 
+                                    the password or pin of that user account.
+                                </p>
+
+                            <img src="Pshell_remoting_B4.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;" alt="Pshell_remoting credentials" /><br></br>
+                                <p class="lead">You can now run PowerShell commands in the remote machine, and 
+                                    begin the PowerShell hunting process.
+                                </p>
+                            <img src="Pshell_remoting_B6.webp" class="img-fluid" class="img-fluid" loading="lazy"
+                                shadow-1-strong rounded mb-4 style="width: 100%;" alt="Pshell_remoting run a cmdlet" /><br></br>
+                            <p class="lead">PowerShell remoting uses port 5985 for http and 5986 for https, and should
+                                be
+                                used to look into...
+                            </p>
+                            <ul>
+                                <li class="lead"><strong>Process list and loaded DLL’s….</strong>
+                                </li>
+                                <li class="lead"><strong>Running services</strong>
+                                <li class="lead"><strong>Scheduled tasks</strong>
+                                </li>
+                                <li class="lead"><strong>Network connections…</strong>
+                                </li>
+                                <li class="lead"><strong>Non-volatile data(reg,mft etc)</strong>
+                                </li>
+                                <li class="lead"><strong>Windows event logs(.evtx files)</strong>
+                                </li>
+                                <li class="lead"><strong>Installed apps</strong>
+                                </li>
+                            </ul>
+                            <p class="lead">The following code is an example of a script that can be run in a remote
+                                session to
+                                get the parent process of a running process using a WMI object.
+                            </p>
+                            <script
+                                src="https://gist.github.com/Grant-Knoetze/eb05a932aee31052cfd74327ddcd6536.js"></script>
+                            <h2 class="display-6"></h2>
+                            <p class="lead">What to hunt for?
+                            </p>
+                            <ul>
+                                <li class="lead">Commands for command prompt CLI (cmd.exe etc) although this is
+                                    suspicious and almost certainly will be flagged by ML tool</li>
+                                <li class="lead">Command and control (C2) servers or other functional URL's</li>
+                                <li class="lead">Registry entries
+                                </li>
+                                <li class="lead">printf* strings</li>
+                                <li class="lead">API's</li>
+                                <li class="lead">Processes, mutexes, file paths, passwords, keys, and PowerShell
+                                    commands</li>
+                                <li class="lead">Malware disguised as svchost(which should only be run by services.exe)
+                                </li>
+                                <li class="lead">Unknown or unsigned DLL/s</li>
+                                <li class="lead">Memory/dll injection</li>
+                                <li class="lead">Suspicious services</li>
+                                <li class="lead">Scheduled tasks</li>
+                                <li class="lead">Non whitelisted or unknown domains</li>
+                                <br></br>
+
+                                <h2 class="display-6">Keep following me on social media to stay tuned for the follow up
+                                    to
+                                    this post...
+                                </h2>
+
+                    </section>
+                    <!--Section: Share buttons-->
+                    <section class="text-center border-top border-bottom py-4 mb-4">
+                        <p><strong>Share it with your network</strong></p>
+                        <a href="https://twitter.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com" class="btn btn-primary m-1" role="button" target="_blank"
+                            rel="noopener">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </section>
+                    <!--Section: Share buttons-->
+
+                    <!--Section: Author-->
+                    <section class="border-bottom mb-4 pb-4">
+                        <div class="row">
+                            <div class="col-3">
+                                <!--<img src="IMG-9879-copy-2.webp" loading="lazy" class="img-fluid shadow-1-strong rounded"
+                            alt="Author" />-
+                    </div>-->
+
+                                <!---- <div class="col-9">-->
+                                <section class="text-left border-top border-bottom py-4 mb-4">
+                                    <p class="mb-2"><strong>Grant Knoetze</strong></p>
+                                    <p>
+                                        IT Support Specialist Cybersecurity Analyst Software Developer
+                                    </p>
+                            </div>
+
+
+                    </section>
+                    <!--Section: Author-->
+
+                   
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4">
+                    <!--Section: Sidebar-->
+                    <section class="sticky-top" style="top: 80px;">
+                    </section>
+                    <!--Section: Ad-->
+                    <section class="text-center border-bottom pb-4 mb-4">
+                        <div class="bg-image hover-overlay ripple mb-4">
+                            <!---- <img src="" class="img-fluid" />-->
+                            <a href="https://github.com/Grant-Knoetze/c--red-team-code" target="_blank" rel="noopener">
+                                <div class="mask" style="background-color: rgba(57, 192, 237, 0.2);"></div>
+                            </a>
+                        </div>
+                        <h5>Useful Code for Red Teaming</h5>
+                        <p class="lead"> This is code that I wrote to help me with red teaming. Disclaimer - Nothing
+                            on this page is intended for malicious purposes, anything that you do with any code is
+                            <em>your own
+                                responsibility</em>, <b>never engage a target without written permission in the form of
+                                a signed contract.</b>
+                        </p>
+                        <a href="https://github.com/Grant-Knoetze/c--red-team-code" class="btn btn-primary m-1"
+                            role="button" rel="nofollow" target="_blank" rel="noopener">
+                            <i class="fab fa-github"></i>
+                        </a>
+
+
+                    </section>
+                    <!--Section: Sidebar-->
+
+                    <!--Grid column-->
+
+                    <!--Grid row-->
+
+    </main>
+    <!--Main layout-->
+
+    <!--Footer-->
+    <footer class="bg-light text-lg-start">
+        <hr class="m-0" />
+
+        <div class="text-center py-4 align-items-center">
+            <p>Follow me on social media</p>
+            <a href="https://twitter.com/KnoetzeGrant" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank" rel="noopener">
+                <i class="fab fa-twitter"></i>
+            </a>
+            <a href="https://github.com/Grant-Knoetze" class="btn btn-primary m-1" role="button" rel="nofollow"
+                target="_blank" rel="noopener">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/grant-knoetze-563b0b1b6/" class="btn btn-primary m-1" role="button"
+                rel="nofollow" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin"></i>
+            </a>
+        </div>
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2025 Copyright: Grant Knoetze
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!--Footer-->
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+    <!-- Google Tag Manager -->
+    <script type="text/javascript"
+        src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=FyAvnV26jgbcxptBeyJ0P1rB6D8Gp4pcXgqZAmh1c9gh8ZhfdxA4DafLZmI1xkzHmm3zxtFCJeLRHK96tqGvfmaywWn3Kty6w0MV4C805MMkGIRUnrIGrRIim13trBSPPfGPzRmeaVnCnntOIY7BHbdR36EVWuuLYGySkYSKiVtwdrU5jEZtgQh_uWXM6x8y"
+        charset="UTF-8"></script>
+    <link rel="stylesheet" crossorigin="anonymous"
+        href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9nYXJnb3lsZS5hc2Vydi5jby56YToyMDgzL2Nwc2VzczYxNDg3OTM3NzMvZG93bmxvYWQ_c2tpcGVuY29kZT0xJmZpbGU9JTJmaG9tZSUyZmdyYW50Y2NiJTJmcHVibGljX2h0bWwlMmZpbmRleC5odG1s" />
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-K4QRS88');
+    </script>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FETHGQJWZF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FETHGQJWZF');
+</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4QRS88" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+      <!--Core Web Vitals-->
+    <script type="module">
+        import {onCLS, onINP, onLCP} from 'https://unpkg.com/web-vitals@4?module';
+        function sendToGoogleAnalytics({name, delta, id}) {
+  // Assumes the global `gtag()` function exists, see:
+  // https://developers.google.com/analytics/devguides/collection/gtagjs
+  gtag('event', name, {
+    event_category: 'Web Vitals',
+    // Google Analytics metrics must be integers, so the value is rounded.
+    // For CLS the value is first multiplied by 1000 for greater precision
+    // (note: increase the multiplier for greater precision if needed).
+    value: Math.round(name === 'CLS' ? delta * 1000 : delta),
+    // The `id` value will be unique to the current page load. When sending
+    // multiple values from the same page (e.g. for CLS), Google Analytics can
+    // compute a total by grouping on this ID (note: requires `eventLabel` to
+    // be a dimension in your report).
+    event_label: id,
+    // Use a non-interaction event to avoid affecting bounce rate.
+    non_interaction: true,
+  });
+}
+
+onCLS(sendToGoogleAnalytics);
+onINP(sendToGoogleAnalytics);
+onLCP(sendToGoogleAnalytics);
+      
+        onCLS(console.log);
+        onINP(console.log);
+        onLCP(console.log);
+      </script>
+      <!--Core Web Vitals End-->
+</body>
+
+</html>
